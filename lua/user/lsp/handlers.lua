@@ -90,6 +90,7 @@ local function lsp_keymaps(bufnr)
 		opts
 	)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gl", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gs", "<cmd>ClangdSwitchSourceHeader<CR>", opts)
 end
 
 -- Define on_attach function
