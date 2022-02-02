@@ -12,9 +12,10 @@ require("user.gitsigns")
 require("user.nvim-tree")
 require("user.bufferline")
 require("user.toggleterm")
+require("user.lualine")
+require("user.project")
 
 -- Legacy
-require("user.lightline")
 require("user.quick-scope")
 require("user.markdown-preview")
 require("user.xkb-switch")

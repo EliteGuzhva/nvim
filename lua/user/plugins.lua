@@ -62,11 +62,14 @@ return packer.startup(function(use)
 	use("navarasu/onedark.nvim")
 	use({ "catppuccin/nvim", as = "catppuccin" })
 
-	use("itchyny/lightline.vim")
+    -- Status line
+	-- use("itchyny/lightline.vim")
+    use("nvim-lualine/lualine.nvim")
 
-	-- Project tree
+	-- Project
 	use("kyazdani42/nvim-web-devicons")
 	use("kyazdani42/nvim-tree.lua")
+    use("ahmedkhalf/project.nvim")
 
 	-- Tabs
 	use("akinsho/bufferline.nvim")

@@ -56,6 +56,7 @@ keymap("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
 keymap("n", "<leader>fc", "<cmd>Telescope colorscheme<cr>", opts)
 keymap("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", opts)
+keymap("n", "<leader>fp", "<cmd>Telescope projects<cr>", opts)
 
 -- VCS
 keymap("n", "<leader>vk", "<cmd>Gitsigns prev_hunk<cr>", opts)
