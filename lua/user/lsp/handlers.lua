@@ -93,16 +93,30 @@ local function lsp_keymaps(bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gs", "<cmd>ClangdSwitchSourceHeader<CR>", opts)
 end
 
+-- Function signature on typing
+local function lsp_func_signature()
+    local status_ok, lsp_signature = pcall(require, "lsp_signature")
+    if not status_ok then
+        return
+    end
+
+    local cfg = {
+        bind = true,
+        hint_prefix = "",
+        handler_opts = {
+            border = "rounded"
+        },
+        transparency = 30
+    }
+
+    lsp_signature.on_attach(cfg)
+end
+
 -- Define on_attach function
 M.on_attach = function(client, bufnr)
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
-
-    -- Function signature on typing
-    local status_ok, lsp_signature = pcall(require, "lsp_signature")
-    if status_ok then
-        lsp_signature.on_attach()
-    end
+    lsp_func_signature()
 end
 
 -- Use cmp_nvim for LSP
