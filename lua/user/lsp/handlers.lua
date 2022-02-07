@@ -97,6 +97,12 @@ end
 M.on_attach = function(client, bufnr)
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
+
+    -- Function signature on typing
+    local status_ok, lsp_signature = pcall(require, "lsp_signature")
+    if status_ok then
+        lsp_signature.on_attach()
+    end
 end
 
 -- Use cmp_nvim for LSP
