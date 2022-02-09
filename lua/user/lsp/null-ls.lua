@@ -15,8 +15,9 @@ null_ls.setup({
 		formatting.stylua,
 		-- Python
 		formatting.black.with({
-			extra_args = { "--fast" },
+			extra_args = { "--fast", "-l", "79" },
 		}),
 		diagnostics.flake8,
+        diagnostics.mypy
 	},
 })
