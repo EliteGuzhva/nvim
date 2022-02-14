@@ -99,6 +99,13 @@ keymap("n", "<leader>sd", "<cmd>SDelete<CR>", opts)
 keymap("n", "<leader>sc", "<cmd>SClose<CR>", opts)
 
 -- Debugging
+function _START_DEBUGGING()
+    vim.cmd("NvimTreeClose")
+    vim.cmd("call vimspector#Launch()")
+end
+
+keymap("n", "<leader>dd", "<cmd>lua _START_DEBUGGING()<CR>", opts)
+keymap("n", "<leader>de", "<cmd>call vimspector#Reset()<CR>", opts)
 keymap("n", "<leader>ds", "<cmd>call vimspector#Stop()<CR>", opts)
 keymap("n", "<leader>dr", "<cmd>call vimspector#Restart()<CR>", opts)
 keymap("n", "<leader>dc", "<cmd>call vimspector#Continue()<CR>", opts)
@@ -111,7 +118,5 @@ keymap("n", "<leader>dj", "<cmd>call vimspector#StepInto()<CR>", opts)
 keymap("n", "<leader>dk", "<cmd>call vimspector#StepOut()<CR>", opts)
 keymap("n", "<leader>dh", "<cmd>call vimspector#UpFrame()<CR>", opts)
 keymap("n", "<leader>dl", "<cmd>call vimspector#DownFrame()<CR>", opts)
-keymap("n", "<leader>dd", "<cmd>call vimspector#Launch()<CR>", opts)
-keymap("n", "<leader>de", "<cmd>call vimspector#Reset()<CR>", opts)
 keymap("n", "<leader>dx", "<cmd>call vimspector#ClearBreakpoints()<CR>", opts)
 keymap("n", "<leader>di", "<Plug>VimspectorBalloonEval", {})
