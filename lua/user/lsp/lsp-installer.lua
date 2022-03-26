@@ -14,7 +14,11 @@ lsp_installer.on_server_ready(function(server)
     if server.name == "clangd" then
         if vim.fn.has("unix") then
             local clangd_opts = {
-                cmd = { "/usr/bin/clangd", "--clang-tidy" }
+                cmd = {
+                    "/usr/bin/clangd",
+                    "--clang-tidy",
+                    "--enable-config",
+                }
             }
             opts = vim.tbl_deep_extend("force", clangd_opts, opts)
         end
