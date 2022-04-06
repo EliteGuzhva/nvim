@@ -119,6 +119,7 @@ return packer.startup(function(use)
     use('cdelledonne/vim-cmake')
     use('rust-lang/rust.vim')
     use('dart-lang/dart-vim-plugin')
+    use('EliteGuzhva/build_config.nvim')
 
 	-- Misc
 	use("windwp/nvim-autopairs")

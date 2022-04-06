@@ -52,11 +52,25 @@ keymap(
 	"<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
 	opts
 )
+keymap(
+	"n",
+	"<C-p>",
+	"<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
+	opts
+)
 keymap("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
-keymap("n", "<leader>fc", "<cmd>Telescope colorscheme<cr>", opts)
+keymap("n", "<leader>ft", "<cmd>Telescope colorscheme<cr>", opts)
 keymap("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", opts)
 keymap("n", "<leader>fp", "<cmd>Telescope projects<cr>", opts)
+keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)
+keymap("n", "<leader>fo", "<cmd>Telescope lsp_document_symbols<cr>", opts)
+keymap(
+	"n",
+	"<leader>fc",
+	"<cmd>lua require'telescope.builtin'.commands(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
+	opts
+)
 
 -- VCS
 keymap("n", "<leader>vk", "<cmd>Gitsigns prev_hunk<cr>", opts)
@@ -120,3 +134,14 @@ keymap("n", "<leader>dh", "<cmd>call vimspector#UpFrame()<CR>", opts)
 keymap("n", "<leader>dl", "<cmd>call vimspector#DownFrame()<CR>", opts)
 keymap("n", "<leader>dx", "<cmd>call vimspector#ClearBreakpoints()<CR>", opts)
 keymap("n", "<leader>di", "<Plug>VimspectorBalloonEval", {})
+
+-- build_config
+keymap("n", "<leader>cx", "<cmd>BCCMakeClean<CR>", opts)
+keymap("n", "<leader>cc", "<cmd>BCCMakeConfigure<CR>", opts)
+keymap("n", "<leader>cb", "<cmd>BCCMakeBuild<CR>", opts)
+keymap("n", "<leader>ci", "<cmd>BCCMakeInstall<CR>", opts)
+
+keymap("n", "<leader>cp", "<cmd>BCConanInstall<CR>", opts)
+
+keymap("n", "<leader>cr", "<cmd>BCLaunch<CR>", opts)
+keymap("n", "<leader>c;", "<cmd>BCCMakeBuildLaunch<CR>", opts)

@@ -14,6 +14,7 @@ require("user.bufferline")
 require("user.toggleterm")
 require("user.lualine")
 require("user.project")
+require("user.build_config")
 
 -- Legacy
 require("user.quick-scope")
