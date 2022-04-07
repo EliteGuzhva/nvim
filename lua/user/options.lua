@@ -25,6 +25,8 @@ end
 -- Filetype specific options
 vim.cmd([[
     autocmd FileType text setlocal textwidth=78
+    autocmd Filetype json setlocal tabstop=2 shiftwidth=2
+    autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2
     autocmd Filetype dart setlocal tabstop=2 shiftwidth=2
     autocmd Filetype h    setlocal tabstop=2 shiftwidth=2
     autocmd Filetype hpp  setlocal tabstop=2 shiftwidth=2
