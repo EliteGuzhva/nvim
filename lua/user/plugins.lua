@@ -62,14 +62,14 @@ return packer.startup(function(use)
 	use("navarasu/onedark.nvim")
 	use({ "catppuccin/nvim", as = "catppuccin" })
 
-    -- Status line
+	-- Status line
 	-- use("itchyny/lightline.vim")
-    use("nvim-lualine/lualine.nvim")
+	use("nvim-lualine/lualine.nvim")
 
 	-- Project
 	use("kyazdani42/nvim-web-devicons")
 	use("kyazdani42/nvim-tree.lua")
-    use("ahmedkhalf/project.nvim")
+	use("ahmedkhalf/project.nvim")
 
 	-- Tabs
 	use("akinsho/bufferline.nvim")
@@ -91,10 +91,10 @@ return packer.startup(function(use)
 	use("neovim/nvim-lspconfig")
 	use("williamboman/nvim-lsp-installer")
 	use("jose-elias-alvarez/null-ls.nvim")
-    use("ray-x/lsp_signature.nvim")
+	use("ray-x/lsp_signature.nvim")
 
-    -- Debugging
-    use('puremourning/vimspector')
+	-- Debugging
+	use("puremourning/vimspector")
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
@@ -109,35 +109,35 @@ return packer.startup(function(use)
 
 	-- VCS
 	use("lewis6991/gitsigns.nvim")
-    use('vim-scripts/vim-svngutter')
-    use('juneedahamed/vc.vim')
+	use("vim-scripts/vim-svngutter")
+	use("juneedahamed/vc.vim")
 
 	-- Terminal
 	use("akinsho/toggleterm.nvim")
 
-    -- Language specific
-    use('cdelledonne/vim-cmake')
-    use('rust-lang/rust.vim')
-    use('dart-lang/dart-vim-plugin')
-    use('EliteGuzhva/build_config.nvim')
+	-- Language specific
+	use("cdelledonne/vim-cmake")
+	use("rust-lang/rust.vim")
+	use("dart-lang/dart-vim-plugin")
+	use("EliteGuzhva/build_config.nvim")
 
 	-- Misc
 	use("windwp/nvim-autopairs")
-	use("numToStr/Comment.nvim")
+	use({ "numToStr/Comment.nvim", tag = "v0.6" })
 
-    -- Legacy vim plugins
+	-- Legacy vim plugins
 	use("junegunn/goyo.vim")
 	use("junegunn/limelight.vim")
 	use("junegunn/vim-easy-align")
-    use('tpope/vim-surround')
-    use('unblevable/quick-scope')
-    use('christoomey/vim-system-copy')
-    use('szw/vim-maximizer')
-    use('lyokha/vim-xkbswitch')
-    use('JamshedVesuna/vim-markdown-preview')
-    use('mhinz/vim-startify')
-    -- use('liuchengxu/vim-which-key')
-    use('tibabit/vim-templates')
+	use("tpope/vim-surround")
+	use("unblevable/quick-scope")
+	use("christoomey/vim-system-copy")
+	use("szw/vim-maximizer")
+	use("lyokha/vim-xkbswitch")
+	use("JamshedVesuna/vim-markdown-preview")
+	use("mhinz/vim-startify")
+	-- use('liuchengxu/vim-which-key')
+	use("tibabit/vim-templates")
 
 	-- Sync if it is the first time
 	if PACKER_BOOTSTRAP then
