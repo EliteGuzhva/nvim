@@ -11,7 +11,7 @@ if colorscheme == "onedark" then
             transparent = true,
             ending_tildes = false,
             toggle_style_key = "<leader>ws",
-            toggle_style_list = {"dark", "light"}
+            toggle_style_list = {"light", "dark"}
         }
     end
 end
