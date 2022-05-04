@@ -123,6 +123,7 @@ return packer.startup(function(use)
 
 	-- Misc
 	use("windwp/nvim-autopairs")
+    use("rcarriga/nvim-notify")
 	use({ "numToStr/Comment.nvim", tag = "v0.6" })
 
 	-- Legacy vim plugins
