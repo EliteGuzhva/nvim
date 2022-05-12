@@ -18,6 +18,9 @@ lsp_installer.on_server_ready(function(server)
                     "clangd",
                     "--clang-tidy",
                     "--enable-config",
+                    "--all-scopes-completion",
+                    "--header-insertion=iwyu",
+                    "--header-insertion-decorators"
                 }
             }
             opts = vim.tbl_deep_extend("force", clangd_opts, opts)
