@@ -16,6 +16,7 @@ local options = {
 	termguicolors = true,
 	laststatus = 2,
 	showmode = false,
+    guifont = "MesloLGM NF:15"
 }
 
 for k, v in pairs(options) do
