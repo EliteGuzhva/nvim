@@ -23,6 +23,32 @@ for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
+-- Font
+vim.g.guifont_face = "FiraCode NF"
+vim.g.guifont_default_size = 11
+vim.g.guifont_size = vim.g.guifont_default_size
+
+RefreshGuiFont = function()
+    vim.opt.guifont = string.format("%s:h%s", vim.g.guifont_face, vim.g.guifont_size)
+end
+
+ResizeGuiFont = function(delta)
+    vim.g.guifont_size = vim.g.guifont_size + delta
+    RefreshGuiFont()
+end
+
+ResetGuiFont = function()
+    vim.g.guifont_size = vim.g.guifont_default_size
+    RefreshGuiFont()
+end
+
+ResetGuiFont()
+
+local opts = { noremap = true, silent = true }
+vim.keymap.set({ 'n', 'i' }, '<C-=>', function() ResizeGuiFont(1) end, opts)
+vim.keymap.set({ 'n', 'i' }, '<C-->', function() ResizeGuiFont(-1) end, opts)
+vim.keymap.set({ 'n', 'i' }, '<C-0>', function() ResetGuiFont() end, opts)
+
 -- Filetype specific options
 vim.cmd([[
     autocmd FileType text setlocal textwidth=78
