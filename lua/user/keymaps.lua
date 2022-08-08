@@ -15,6 +15,8 @@ keymap("n", "+", "<C-W>+", opts)
 keymap("n", "<", "<C-W><", opts)
 keymap("n", ">", "<C-W>>", opts)
 
+keymap("i", "<C-v>", "<C-r>+", opts)
+
 keymap("n", "<leader>q", ":q<CR>", opts)
 keymap("n", "<leader>x", ":xa<CR>", opts)
 keymap("n", "<leader>h", ":wincmd h<CR>", opts)

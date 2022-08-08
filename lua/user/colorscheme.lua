@@ -8,7 +8,7 @@ if colorscheme == "onedark" then
     if status_ok then
         onedark.setup {
             style = "dark",
-            transparent = true,
+            transparent = false,
             ending_tildes = false,
             toggle_style_key = "<leader>ws",
             toggle_style_list = {"light", "dark"}
