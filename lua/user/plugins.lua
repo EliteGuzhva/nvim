@@ -109,14 +109,12 @@ return packer.startup(function(use)
 
 	-- VCS
 	use("lewis6991/gitsigns.nvim")
-	use("vim-scripts/vim-svngutter")
 	use("juneedahamed/vc.vim")
 
 	-- Terminal
 	use("akinsho/toggleterm.nvim")
 
 	-- Language specific
-	use("cdelledonne/vim-cmake")
 	use("rust-lang/rust.vim")
 	use("dart-lang/dart-vim-plugin")
 	use("EliteGuzhva/build_config.nvim")
