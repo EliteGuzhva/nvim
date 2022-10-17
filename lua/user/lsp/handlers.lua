@@ -72,8 +72,8 @@ local function lsp_keymaps(bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gH", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gf", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gc", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>gc", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gc", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>gc", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>go", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(
 		bufnr,

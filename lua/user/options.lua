@@ -15,7 +15,8 @@ local options = {
     undofile = true,
     termguicolors = true,
     laststatus = 2,
-    showmode = false
+    showmode = false,
+    cmdheight = 0
 }
 
 for k, v in pairs(options) do
