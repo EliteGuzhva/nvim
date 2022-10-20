@@ -1,6 +1,6 @@
 vim.opt.background = "dark"
 
-local colorscheme = "onedark"
+local colorscheme = "catppuccin"
 
 -- One dark specific
 if colorscheme == "onedark" then
