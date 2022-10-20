@@ -30,6 +30,9 @@ keymap("v", ">", ">gv", opts)
 
 keymap("t", "<Esc>", "<C-\\><C-N>", opts)
 
+-- Theme
+keymap("n", "<leader>ws", ':exec &background=="light" ? "set background=dark" : "set background=light"<CR>', opts)
+
 -- Project tree
 keymap("n", "<leader>pt", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<leader>pf", ":NvimTreeFindFile<CR>", opts)

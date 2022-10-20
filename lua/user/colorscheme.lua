@@ -16,6 +16,21 @@ if colorscheme == "onedark" then
     end
 end
 
+if colorscheme == "catppuccin" then
+    local status_ok, catppuccin = pcall(require, colorscheme)
+    if status_ok then
+        vim.g.catppuccin_flavour = "macchiato"
+        catppuccin.setup()
+
+        vim.api.nvim_create_autocmd("OptionSet", {
+            pattern = "background",
+            callback = function()
+                vim.cmd("Catppuccin " .. (vim.v.option_new == "light" and "latte" or "macchiato"))
+            end,
+        })
+    end
+end
+
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not status_ok then
 	vim.notify("Colorscheme `" .. colorscheme .. "` not found!")
