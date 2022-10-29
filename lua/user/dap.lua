@@ -19,7 +19,7 @@ dap.adapters.codelldb = {
 
 if vim.g.bc_config ~= nil then
     local opts = vim.g.bc_config["launch"]
-    local cwd = "${workspaceFolder}" .. opts["cwd"]
+    local cwd = "${workspaceFolder}/" .. opts["cwd"]
     local exe = opts["exe"]
     local args = opts["args"]
 
