@@ -19,7 +19,7 @@ dap.adapters.codelldb = {
 
 if vim.g.bc_config ~= nil then
     local opts = vim.g.bc_config["launch"]
-    local cwd = opts["cwd"]
+    local cwd = "${workspaceFolder}" .. opts["cwd"]
     local exe = opts["exe"]
     local args = opts["args"]
 
@@ -70,7 +70,7 @@ if vim.g.bc_config ~= nil then
             stopAtEntry = false,
             externalConsole = false,
             MIMode = "gdb",
-            miDebuggerPath = vim.g.bc_config["launch"]["cwd"] .. "/virtualrunenv_gdb.sh",
+            miDebuggerPath = cwd .. "/virtualrunenv_gdb.sh",
             setupCommands = {
                 {
                     description = "Enable pretty-printing for gdb",
