@@ -63,7 +63,6 @@ return packer.startup(function(use)
 	use({ "catppuccin/nvim", as = "catppuccin" })
 
 	-- Status line
-	-- use("itchyny/lightline.vim")
 	use("nvim-lualine/lualine.nvim")
 
 	-- Project
@@ -94,7 +93,10 @@ return packer.startup(function(use)
 	use("ray-x/lsp_signature.nvim")
 
 	-- Debugging
-	use("puremourning/vimspector")
+    use("mfussenegger/nvim-dap")
+    use("rcarriga/nvim-dap-ui")
+    use("theHamsta/nvim-dap-virtual-text")
+    use("mfussenegger/nvim-dap-python")
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")

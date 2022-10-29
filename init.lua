@@ -16,6 +16,7 @@ require("user.lualine")
 require("user.project")
 require("user.notify")
 require("user.build_config")
+require("user.dap")
 
 -- Legacy
 require("user.quick-scope")
@@ -23,7 +24,6 @@ require("user.markdown-preview")
 require("user.xkb-switch")
 require("user.templates")
 require("user.startify")
-require("user.vimspector")
 
 -- Source local .nvimrc
 local local_vimrc = vim.fn.getcwd() .. "/.nvimrc"
