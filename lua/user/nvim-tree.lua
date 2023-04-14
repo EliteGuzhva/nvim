@@ -77,6 +77,6 @@ nvim_tree.setup({
     }
 })
 
-vim.cmd([[
-    autocmd VimEnter * exec 'NvimTreeFindFile' | wincmd p
-]])
+-- vim.cmd([[
+--     autocmd VimEnter * exec 'NvimTreeFindFile' | wincmd p
+-- ]])
