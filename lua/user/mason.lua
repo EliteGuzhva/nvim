@@ -61,11 +61,17 @@ mason_null.setup({
 		"flake8",
 		"mypy",
 		"clang_format",
+		"cmakelang",
+		"prettier",
+        "jsonlint",
+        "yamllint",
 	},
 	automatic_setup = true,
 	handlers = {
 		function(source_name, methods)
 			mason_null.default_setup(source_name, methods)
+		end,
+		clang_format = function()
 		end,
 	},
 })
