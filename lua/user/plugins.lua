@@ -87,10 +87,6 @@ return packer.startup(function(use)
     use("rafamadriz/friendly-snippets")
 
     -- LSP
-    use({
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-    })
     use("neovim/nvim-lspconfig")
     use("jose-elias-alvarez/null-ls.nvim")
     use("ray-x/lsp_signature.nvim")
@@ -99,7 +95,14 @@ return packer.startup(function(use)
     use("mfussenegger/nvim-dap")
     use("rcarriga/nvim-dap-ui")
     use("theHamsta/nvim-dap-virtual-text")
-    use("mfussenegger/nvim-dap-python")
+
+    -- Mason
+    use({
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "jay-babu/mason-nvim-dap.nvim",
+        "jay-babu/mason-null-ls.nvim",
+    })
 
     -- Telescope
     use("nvim-telescope/telescope.nvim")

@@ -12,12 +12,12 @@ null_ls.setup({
         -- C/C++
         -- formatting.clang_format,
         -- Lua
-        formatting.stylua,
+        -- formatting.stylua,
         -- Python
         formatting.black.with({
             extra_args = { "--fast", "-l", "79" },
         }),
-        diagnostics.flake8,
-        diagnostics.mypy
+        -- diagnostics.flake8,
+        -- diagnostics.mypy
     },
 })
