@@ -18,6 +18,7 @@ require("user.project")
 require("user.notify")
 require("user.build_config")
 require("user.dap")
+require("user.gpt")
 
 -- Legacy
 require("user.quick-scope")

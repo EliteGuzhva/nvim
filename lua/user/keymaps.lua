@@ -162,3 +162,13 @@ keymap("n", "<leader>cp", "<cmd>BCConanInstall<CR>", opts)
 
 keymap("n", "<leader>cr", "<cmd>BCLaunch<CR>", opts)
 keymap("n", "<leader>c;", "<cmd>BCCMakeBuildLaunch<CR>", opts)
+
+-- gpt
+keymap("n", "<leader>ai", "<cmd>ChatGPT<CR>", opts)
+keymap("v", "<leader>at", "<cmd>ChatGPTRun translate<CR>", opts)
+keymap("v", "<leader>ae", "<cmd>ChatGPTRun explain_code<CR>", opts)
+keymap("v", "<leader>ad", "<cmd>ChatGPTRun docstring<CR>", opts)
+keymap("v", "<leader>af", "<cmd>ChatGPTRun fix_bugs<CR>", opts)
+keymap("v", "<leader>ao", "<cmd>ChatGPTRun optimize_code<CR>", opts)
+keymap("v", "<leader>ac", "<cmd>ChatGPTRun add_tests<CR>", opts)
+keymap("v", "<leader>ar", "<cmd>ChatGPTRun code_readability_analysis<CR>", opts)
