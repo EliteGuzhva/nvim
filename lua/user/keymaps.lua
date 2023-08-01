@@ -126,6 +126,7 @@ end
 
 function _STOP_DEBUGGING()
     require('dap').disconnect()
+    require('dap').close()
     require('dapui').close()
 end
 
@@ -167,7 +168,7 @@ keymap("n", "<leader>c;", "<cmd>BCCMakeBuildLaunch<CR>", opts)
 keymap("n", "<leader>ai", "<cmd>ChatGPT<CR>", opts)
 keymap("v", "<leader>at", "<cmd>ChatGPTRun translate<CR>", opts)
 keymap("v", "<leader>ae", "<cmd>ChatGPTRun explain_code<CR>", opts)
-keymap("v", "<leader>ad", "<cmd>ChatGPTRun docstring<CR>", opts)
+keymap("v", "<leader>ad", "<cmd>ChatGPTRun doxygen_edit<CR>", opts)
 keymap("v", "<leader>af", "<cmd>ChatGPTRun fix_bugs<CR>", opts)
 keymap("v", "<leader>ao", "<cmd>ChatGPTRun optimize_code<CR>", opts)
 keymap("v", "<leader>ac", "<cmd>ChatGPTRun add_tests<CR>", opts)

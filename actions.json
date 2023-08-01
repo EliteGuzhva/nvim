@@ -1,0 +1,14 @@
+{
+  "doxygen_edit": {
+    "type": "chat",
+    "opts": {
+      "template": "Insert a doxygen docstring to document a C++ function. Docstring should be written using '//!' symbols on each line instead of '/*', '*', '*/'. Each doxygen keyword should be prefixed with '@' symbol instead of '\\'. Docstring should be in Russian except for function name and arguments. Docstring's lines should not end with '.' symbol. Here is an example:\n\n```{{filetype}}\n//! Описание функции\n//! @param[in] arg1 Первый аргумент\n//! @return Описание выхода функции\n```\n\n Do NOT include function signature in an answer, provide only a docstring. Here is a function:\n\n```{{filetype}}\n[insert]\n\n{{input}}\n\n```",
+      "strategy": "prepend",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "temperature": 0.5,
+        "max_tokens": 1024
+      }
+    }
+  }
+}

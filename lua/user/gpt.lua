@@ -7,5 +7,6 @@ local home = vim.fn.expand("$HOME")
 local path_to_config = home .. "/.config/nvim"
 
 chatgpt.setup({
-    api_key_cmd = path_to_config .. "/gpt_key.sh"
+	api_key_cmd = path_to_config .. "/gpt_key.sh",
+	actions_paths = { path_to_config .. "/actions.json" },
 })
