@@ -118,18 +118,6 @@ keymap("n", "<leader>sd", "<cmd>SDelete<CR>", opts)
 keymap("n", "<leader>sc", "<cmd>SClose<CR>", opts)
 
 -- Debugging
-function _START_DEBUGGING()
-    vim.cmd("NvimTreeClose")
-    require('dap').continue()
-    require('dapui').open()
-end
-
-function _STOP_DEBUGGING()
-    require('dap').disconnect()
-    require('dap').close()
-    require('dapui').close()
-end
-
 keymap("n", "<F5>", "<cmd>lua _START_DEBUGGING()<CR>", opts)
 keymap("n", "<F8>", "<cmd>lua _STOP_DEBUGGING()<CR>", opts)
 keymap("n", "<F9>", "<cmd>lua require('dap').toggle_breakpoint()<CR>", opts)

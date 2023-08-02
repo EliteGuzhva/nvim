@@ -89,3 +89,19 @@ end
 -- UI
 require("dapui").setup()
 require("nvim-dap-virtual-text").setup()
+
+-- Functions
+function _START_DEBUGGING()
+    vim.cmd("NvimTreeClose")
+    vim.cmd("ToggleTermToggleAll")
+    require('dap').continue()
+    require('dapui').open()
+end
+
+function _STOP_DEBUGGING()
+    require('dap').disconnect()
+    require('dap').close()
+    require('dapui').close()
+    vim.cmd("ToggleTermToggleAll")
+    vim.cmd("NvimTreeOpen")
+end
