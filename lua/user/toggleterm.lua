@@ -39,27 +39,32 @@ vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
 local Terminal = require("toggleterm.terminal").Terminal
 
-local split = Terminal:new({ cmd = "zsh", hidden = true, direction = "horizontal" })
+local float = Terminal:new({name = "float", count = 1000 })
+function _FLOAT_TOGGLE()
+	float:toggle()
+end
+
+local split = Terminal:new({ name = "split", direction = "horizontal", count = 100 })
 function _SPLIT_TOGGLE()
 	split:toggle()
 end
 
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, count = 101 })
 function _LAZYGIT_TOGGLE()
 	lazygit:toggle()
 end
 
-local lazydocker = Terminal:new({ cmd = "lazydocker", hidden = true })
+local lazydocker = Terminal:new({ cmd = "lazydocker", hidden = true, count = 102 })
 function _LAZYDOCKER_TOGGLE()
 	lazydocker:toggle()
 end
 
-local htop = Terminal:new({ cmd = "htop", hidden = true })
+local htop = Terminal:new({ cmd = "htop", hidden = true, count = 103 })
 function _HTOP_TOGGLE()
 	htop:toggle()
 end
 
-local python = Terminal:new({ cmd = "python3", hidden = true })
+local python = Terminal:new({ cmd = "python3", hidden = true, count = 104 })
 function _PYTHON_TOGGLE()
 	python:toggle()
 end

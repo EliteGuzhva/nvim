@@ -91,8 +91,11 @@ keymap("n", "<leader>vvk", "<cmd>SvnGutterPrefHunk<cr>", opts)
 keymap("n", "<leader>vvk", "<cmd>SvnGutterNextHunk<cr>", opts)
 
 -- Terminal
-keymap("n", "<leader>tt", "<cmd>ToggleTerm<cr>", opts)
-keymap("n", "<leader>t;", "<cmd>ToggleTerm<cr>", opts)
+keymap("n", "<leader>t1", "<cmd>1ToggleTerm direction=horizontal<cr>", opts)
+keymap("n", "<leader>t2", "<cmd>2ToggleTerm direction=horizontal<cr>", opts)
+keymap("n", "<leader>t3", "<cmd>3ToggleTerm direction=horizontal<cr>", opts)
+keymap("n", "<leader>tt", "<cmd>ToggleTermToggleAll<cr>", opts)
+keymap("n", "<leader>t;", "<cmd>lua _FLOAT_TOGGLE()<cr>", opts)
 keymap("n", "<leader>ts", "<cmd>lua _SPLIT_TOGGLE()<cr>", opts)
 keymap("n", "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", opts)
 keymap("n", "<leader>td", "<cmd>lua _LAZYDOCKER_TOGGLE()<cr>", opts)
