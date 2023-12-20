@@ -68,3 +68,12 @@ local python = Terminal:new({ cmd = "python3", hidden = true, count = 104 })
 function _PYTHON_TOGGLE()
 	python:toggle()
 end
+
+local build_dir = "build"
+if vim.g.bc_config ~= nil and vim.g.bc_config["build_dir"] ~= nil then
+    build_dir = vim.g.bc_config["build_dir"]
+end
+local ccmake = Terminal:new({ cmd = "ccmake -B " .. build_dir .. " .", hidden = true, count = 105 })
+function _CCMAKE_TOGGLE()
+	ccmake:toggle()
+end

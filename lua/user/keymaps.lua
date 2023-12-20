@@ -101,6 +101,7 @@ keymap("n", "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", opts)
 keymap("n", "<leader>td", "<cmd>lua _LAZYDOCKER_TOGGLE()<cr>", opts)
 keymap("n", "<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>", opts)
 keymap("n", "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", opts)
+keymap("n", "<leader>tc", "<cmd>lua _CCMAKE_TOGGLE()<cr>", opts)
 
 -- Zen mode
 keymap("n", "<leader>zf", "<cmd>Goyo<CR>", opts)
