@@ -46,6 +46,7 @@ return packer.startup(function(use)
 	-- Required by other lua plugins
 	use("nvim-lua/popup.nvim")
 	use("nvim-lua/plenary.nvim")
+    use("nvim-neotest/nvim-nio")
 
 	-- Themes
 	use("arcticicestudio/nord-vim")
