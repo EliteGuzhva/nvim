@@ -15,10 +15,10 @@ require("user.bufferline")
 require("user.toggleterm")
 require("user.lualine")
 require("user.project")
-require("user.notify")
 require("user.build_config")
 require("user.dap")
-require("user.gpt")
+-- require("user.notify")
+-- require("user.gpt")
 
 -- Legacy
 require("user.quick-scope")
