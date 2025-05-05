@@ -17,8 +17,6 @@ require("user.lualine")
 require("user.project")
 require("user.build_config")
 require("user.dap")
--- require("user.notify")
--- require("user.gpt")
 
 -- Legacy
 require("user.quick-scope")
