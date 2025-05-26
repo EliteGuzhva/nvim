@@ -1,5 +1,24 @@
 local M = {}
 
+-- Function signature on typing
+local function lsp_func_signature()
+    local status_ok, lsp_signature = pcall(require, "lsp_signature")
+    if not status_ok then
+        return
+    end
+
+    local cfg = {
+        bind = true,
+        hint_prefix = "",
+        handler_opts = {
+            border = "rounded"
+        },
+        transparency = 30
+    }
+
+    lsp_signature.on_attach(cfg)
+end
+
 M.setup = function()
 	-- Setup signs
 	local signs = {
@@ -42,74 +61,8 @@ M.setup = function()
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 		border = "rounded",
 	})
-end
 
--- Highlight selected object
-local function lsp_highlight_document(client)
-	-- Set autocommands conditional on server_capabilities
-	if client.server_capabilities.document_highlight then
-		vim.api.nvim_exec(
-			[[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
-			false
-		)
-	end
-end
-
--- Keymaps
-local function lsp_keymaps(bufnr)
-	local opts = { noremap = true, silent = true }
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gH", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gf", "<cmd>lua vim.lsp.buf.code_action({ apply = true })<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gc", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "v", "<leader>gc", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>go", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(
-		bufnr,
-		"n",
-		"<leader>gk",
-		'<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>',
-		opts
-	)
-	vim.api.nvim_buf_set_keymap(
-		bufnr,
-		"n",
-		"<leader>gj",
-		'<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>',
-		opts
-	)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gl", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>gs", "<cmd>ClangdSwitchSourceHeader<CR>", opts)
-end
-
--- Function signature on typing
-local function lsp_func_signature()
-    local status_ok, lsp_signature = pcall(require, "lsp_signature")
-    if not status_ok then
-        return
-    end
-
-    local cfg = {
-        bind = true,
-        hint_prefix = "",
-        handler_opts = {
-            border = "rounded"
-        },
-        transparency = 30
-    }
-
-    lsp_signature.on_attach(cfg)
+    lsp_func_signature()
 end
 
 -- Define on_attach function

@@ -145,6 +145,33 @@ keymap("n", "<leader>do", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('
 keymap("n", "<leader>du", "<cmd>lua require('dapui').toggle()<CR>", {})
 keymap("n", "<leader>di", "<cmd>lua require('dapui').eval()<CR>", {})
 
+-- LSP
+keymap("n", "<leader>gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+keymap("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+keymap("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+keymap("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+keymap("n", "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+keymap("n", "<leader>gH", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+keymap("n", "<leader>gn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+keymap("n", "<leader>gf", "<cmd>lua vim.lsp.buf.code_action({ apply = true })<CR>", opts)
+keymap("n", "<leader>gc", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+keymap("v", "<leader>gc", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+keymap("n", "<leader>go", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+keymap(
+    "n",
+    "<leader>gk",
+    '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>',
+    opts
+)
+keymap(
+    "n",
+    "<leader>gj",
+    '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>',
+    opts
+)
+keymap("n", "<leader>gl", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+keymap("n", "<leader>gs", "<cmd>ClangdSwitchSourceHeader<CR>", opts)
+
 -- build_config
 keymap("n", "<leader>cx", "<cmd>BCCMakeClean<CR>", opts)
 keymap("n", "<leader>cc", "<cmd>BCCMakeConfigure<CR>", opts)
@@ -155,13 +182,3 @@ keymap("n", "<leader>cp", "<cmd>BCConanInstall<CR>", opts)
 
 keymap("n", "<leader>cr", "<cmd>BCLaunch<CR>", opts)
 keymap("n", "<leader>c;", "<cmd>BCCMakeBuildLaunch<CR>", opts)
-
--- gpt
-keymap("n", "<leader>ai", "<cmd>ChatGPT<CR>", opts)
-keymap("v", "<leader>at", "<cmd>ChatGPTRun translate<CR>", opts)
-keymap("v", "<leader>ae", "<cmd>ChatGPTRun explain_code<CR>", opts)
-keymap("v", "<leader>ad", "<cmd>ChatGPTRun doxygen_edit<CR>", opts)
-keymap("v", "<leader>af", "<cmd>ChatGPTRun fix_bugs<CR>", opts)
-keymap("v", "<leader>ao", "<cmd>ChatGPTRun optimize_code<CR>", opts)
-keymap("v", "<leader>ac", "<cmd>ChatGPTRun add_tests<CR>", opts)
-keymap("v", "<leader>ar", "<cmd>ChatGPTRun code_readability_analysis<CR>", opts)

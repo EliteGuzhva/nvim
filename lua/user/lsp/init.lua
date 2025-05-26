@@ -20,6 +20,5 @@ local dartls_opts = {
 dartls_opts = vim.tbl_deep_extend("force", dartls_opts, opts)
 lspconfig.dartls.setup(dartls_opts)
 
-require("user.lsp.mason-lspconfig")
 require("user.lsp.handlers").setup()
 require("user.lsp.null-ls")
