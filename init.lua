@@ -18,6 +18,8 @@ require("user.project")
 require("user.build_config")
 require("user.dap")
 require("user.whichkey")
+require("user.noice")
+require("user.dressing")
 
 -- Legacy
 require("user.quick-scope")

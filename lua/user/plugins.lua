@@ -172,6 +172,31 @@ return {
   },
   { "EliteGuzhva/build_config.nvim", lazy = true },
 
+  -- UI Enhancements
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+  },
+  {
+    "stevearc/dressing.nvim",
+    lazy = true,
+    init = function()
+      vim.ui.select = function(...)
+        require("lazy").load({ plugins = { "dressing.nvim" } })
+        return vim.ui.select(...)
+      end
+      vim.ui.input = function(...)
+        require("lazy").load({ plugins = { "dressing.nvim" } })
+        return vim.ui.input(...)
+      end
+    end,
+  },
+  { "MunifTanjim/nui.nvim", lazy = true },
+
   -- Misc
   {
     "windwp/nvim-autopairs",
