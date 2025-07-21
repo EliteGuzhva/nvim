@@ -143,6 +143,9 @@ return packer.startup(function(use)
 	use("rcarriga/nvim-notify")
 	use({ "numToStr/Comment.nvim", tag = "v0.6" })
 
+	-- Key bindings
+	use("folke/which-key.nvim")
+
 	-- Legacy vim plugins
 	use("junegunn/goyo.vim")
 	use("junegunn/limelight.vim")
@@ -154,7 +157,6 @@ return packer.startup(function(use)
 	use("lyokha/vim-xkbswitch")
 	use("JamshedVesuna/vim-markdown-preview")
 	use("mhinz/vim-startify")
-	-- use('liuchengxu/vim-which-key')
 	use("tibabit/vim-templates")
 
 	-- Sync if it is the first time

@@ -17,6 +17,7 @@ require("user.lualine")
 require("user.project")
 require("user.build_config")
 require("user.dap")
+require("user.whichkey")
 
 -- Legacy
 require("user.quick-scope")
