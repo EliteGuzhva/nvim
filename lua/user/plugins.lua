@@ -1,166 +1,205 @@
-local fn = vim.fn
+-- Plugins configuration for lazy.nvim
+return {
+  -- Required by other lua plugins
+  { "nvim-lua/popup.nvim" },
+  { "nvim-lua/plenary.nvim" },
+  { "nvim-neotest/nvim-nio" },
 
--- Automatically install packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = fn.system({
-		"git",
-		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
-	})
-	print("Installing packer. Close and reopen Neovim!")
-	vim.cmd([[packadd packer.nvim]])
-end
+  -- Themes
+  { "arcticicestudio/nord-vim", lazy = true },
+  { "dracula/vim", name = "dracula", lazy = true },
+  { "ayu-theme/ayu-vim", lazy = true },
+  { "adrian5/oceanic-next-vim", lazy = true },
+  { "morhetz/gruvbox", lazy = true },
+  { "sonph/onehalf", lazy = true },
+  { "arzg/vim-colors-xcode", lazy = true },
+  { "tomasiser/vim-code-dark", lazy = true },
+  { "bluz71/vim-nightfly-guicolors", lazy = true },
+  { "EliteGuzhva/gruvbox-material", lazy = true },
+  { "rmehri01/onenord.nvim", lazy = true },
+  { "navarasu/onedark.nvim", lazy = true },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
--- Sync packages on edit
-vim.cmd([[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost plugins.lua source <afile> | PackerSync
-    augroup end
-]])
+  -- Status line
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
 
--- Safe call
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-	return
-end
+  -- Project
+  { "nvim-tree/nvim-web-devicons", lazy = true },
+  {
+    "nvim-tree/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFocus" },
+    keys = { { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Explorer" } },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  {
+    "ahmedkhalf/project.nvim",
+    event = "VeryLazy",
+  },
 
--- Popup window
-packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
-		end,
-	},
-})
+  -- Tabs
+  {
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicons", "moll/vim-bbye" },
+  },
+  { "moll/vim-bbye", cmd = { "Bdelete", "Bwipeout" } },
 
--- Install plugins
-return packer.startup(function(use)
-	-- Packer itself
-	use("wbthomason/packer.nvim")
+  -- Completion
+  {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
+      "L3MON4D3/LuaSnip",
+      "rafamadriz/friendly-snippets",
+    },
+  },
+  { "hrsh7th/cmp-buffer", lazy = true },
+  { "hrsh7th/cmp-path", lazy = true },
+  { "hrsh7th/cmp-cmdline", lazy = true },
+  { "hrsh7th/cmp-nvim-lsp", lazy = true },
+  { "hrsh7th/cmp-nvim-lua", lazy = true },
 
-	-- Required by other lua plugins
-	use("nvim-lua/popup.nvim")
-	use("nvim-lua/plenary.nvim")
-    use("nvim-neotest/nvim-nio")
+  -- Snippets
+  {
+    "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp",
+    lazy = true,
+  },
+  { "rafamadriz/friendly-snippets", lazy = true },
 
-	-- Themes
-	use("arcticicestudio/nord-vim")
-	use({ "dracula/vim", as = "dracula" })
-	use("ayu-theme/ayu-vim")
-	use("adrian5/oceanic-next-vim")
-	use("morhetz/gruvbox")
-	use("sonph/onehalf")
-	use("arzg/vim-colors-xcode")
-	use("tomasiser/vim-code-dark")
-	use("bluz71/vim-nightfly-guicolors")
-	use("EliteGuzhva/gruvbox-material")
-	use("rmehri01/onenord.nvim")
-	use("navarasu/onedark.nvim")
-	use({ "catppuccin/nvim", as = "catppuccin" })
+  -- LSP
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+    },
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "mason.nvim" },
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+  },
 
-	-- Status line
-	use("nvim-lualine/lualine.nvim")
+  -- Debugging
+  {
+    "mfussenegger/nvim-dap",
+    lazy = true,
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "jay-babu/mason-nvim-dap.nvim",
+      "nvim-neotest/nvim-nio",
+    },
+  },
+  { "rcarriga/nvim-dap-ui", lazy = true },
+  { "theHamsta/nvim-dap-virtual-text", lazy = true },
 
-	-- Project
-	use("kyazdani42/nvim-web-devicons")
-	use("kyazdani42/nvim-tree.lua")
-	use("ahmedkhalf/project.nvim")
+  -- Mason
+  {
+    "williamboman/mason.nvim",
+    cmd = "Mason",
+    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+    build = ":MasonUpdate",
+  },
+  { "williamboman/mason-lspconfig.nvim", lazy = true },
+  { "jay-babu/mason-nvim-dap.nvim", lazy = true },
+  { "jay-babu/mason-null-ls.nvim", lazy = true },
 
-	-- Tabs
-	use("akinsho/bufferline.nvim")
-	use("moll/vim-bbye")
+  -- Telescope
+  {
+    "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    keys = {
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+    },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-media-files.nvim",
+    },
+  },
+  { "nvim-telescope/telescope-media-files.nvim", lazy = true },
 
-	-- Completion
-	use("hrsh7th/nvim-cmp")
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-cmdline")
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-nvim-lua")
+  -- Treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPost", "BufNewFile" },
+    build = ":TSUpdate",
+    dependencies = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
+  },
+  { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
 
-	-- snippets
-	use("L3MON4D3/LuaSnip")
-	use("rafamadriz/friendly-snippets")
+  -- VCS
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  { "juneedahamed/vc.vim", cmd = { "VCStatus", "VCDiff", "VCLog" } },
 
-	-- LSP
-	use("neovim/nvim-lspconfig")
-	use("nvimtools/none-ls.nvim")
-	use("ray-x/lsp_signature.nvim")
+  -- Terminal
+  {
+    "akinsho/toggleterm.nvim",
+    keys = { { "<leader>tf", desc = "Float terminal" } },
+    cmd = { "ToggleTerm", "TermExec" },
+  },
 
-	-- Debugging
-	use("mfussenegger/nvim-dap")
-	use("rcarriga/nvim-dap-ui")
-	use("theHamsta/nvim-dap-virtual-text")
+  -- Language specific
+  {
+    "rust-lang/rust.vim",
+    ft = "rust",
+  },
+  {
+    "dart-lang/dart-vim-plugin",
+    ft = "dart",
+  },
+  { "EliteGuzhva/build_config.nvim", lazy = true },
 
-	-- Mason
-	use({
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
-		"jay-babu/mason-nvim-dap.nvim",
-		"jay-babu/mason-null-ls.nvim",
-	})
+  -- Misc
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+  },
+  { "rcarriga/nvim-notify", lazy = true },
+  {
+    "numToStr/Comment.nvim",
+    keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
+    version = "v0.6",
+  },
 
-	-- Telescope
-	use("nvim-telescope/telescope.nvim")
-	use("nvim-telescope/telescope-media-files.nvim")
+  -- Key bindings
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+  },
 
-	-- Treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-	})
-	use("JoosepAlviste/nvim-ts-context-commentstring")
-
-	-- VCS
-	use("lewis6991/gitsigns.nvim")
-	use("juneedahamed/vc.vim")
-
-	-- Terminal
-	use("akinsho/toggleterm.nvim")
-
-	-- Language specific
-	use("rust-lang/rust.vim")
-	use("dart-lang/dart-vim-plugin")
-	use("EliteGuzhva/build_config.nvim")
-
-	-- AI
-	use({
-		"jackMort/ChatGPT.nvim",
-		requires = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-	})
-
-	-- Misc
-	use("windwp/nvim-autopairs")
-	use("rcarriga/nvim-notify")
-	use({ "numToStr/Comment.nvim", tag = "v0.6" })
-
-	-- Key bindings
-	use("folke/which-key.nvim")
-
-	-- Legacy vim plugins
-	use("junegunn/goyo.vim")
-	use("junegunn/limelight.vim")
-	use("junegunn/vim-easy-align")
-	use("tpope/vim-surround")
-	use("unblevable/quick-scope")
-	use("christoomey/vim-system-copy")
-	use("szw/vim-maximizer")
-	use("lyokha/vim-xkbswitch")
-	use("JamshedVesuna/vim-markdown-preview")
-	use("mhinz/vim-startify")
-	use("tibabit/vim-templates")
-
-	-- Sync if it is the first time
-	if PACKER_BOOTSTRAP then
-		require("packer").sync()
-	end
-end)
+  -- Legacy vim plugins
+  { "junegunn/goyo.vim", cmd = "Goyo" },
+  { "junegunn/limelight.vim", cmd = "Limelight" },
+  { "junegunn/vim-easy-align", cmd = { "EasyAlign", "LiveEasyAlign" } },
+  { "tpope/vim-surround", keys = { "c", "d", "y" } },
+  { "unblevable/quick-scope", keys = { "f", "F", "t", "T" } },
+  { "christoomey/vim-system-copy", keys = { "cp", "cv" } },
+  { "szw/vim-maximizer", keys = { { "<leader>sm", "<cmd>MaximizerToggle<cr>", desc = "Maximize" } } },
+  { "lyokha/vim-xkbswitch", event = "InsertEnter" },
+  { "JamshedVesuna/vim-markdown-preview", ft = "markdown" },
+  { "mhinz/vim-startify", lazy = false },
+  { "tibabit/vim-templates", cmd = "TemplateInit" },
+}
