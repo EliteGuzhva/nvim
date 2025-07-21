@@ -12,7 +12,7 @@ toggleterm.setup({
 	shading_factor = 2,
 	start_in_insert = true,
 	insert_mappings = true,
-	persist_size = true,
+	persist_size = false,
 	direction = "float",
 	close_on_exit = true,
 	shell = vim.o.shell,
@@ -76,4 +76,9 @@ end
 local ccmake = Terminal:new({ cmd = "ccmake -B " .. build_dir .. " .", hidden = true, count = 105 })
 function _CCMAKE_TOGGLE()
 	ccmake:toggle()
+end
+
+local claude = Terminal:new({ cmd = "claude", direction = "vertical", size = 30, hidden = true, count = 106 })
+function _CLAUDE_TOGGLE()
+	claude:toggle()
 end
