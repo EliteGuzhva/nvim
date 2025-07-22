@@ -225,6 +225,10 @@ return {
   { "szw/vim-maximizer", keys = { { "<leader>sm", "<cmd>MaximizerToggle<cr>", desc = "Maximize" } } },
   { "lyokha/vim-xkbswitch", event = "InsertEnter" },
   { "JamshedVesuna/vim-markdown-preview", ft = "markdown" },
-  { "mhinz/vim-startify", lazy = false },
+  {
+    "goolord/alpha-nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
   { "tibabit/vim-templates", cmd = "TemplateInit" },
 }

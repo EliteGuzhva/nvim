@@ -26,7 +26,7 @@ require("user.quick-scope")
 require("user.markdown-preview")
 require("user.xkb-switch")
 require("user.templates")
-require("user.startify")
+require("user.alpha")
 
 -- Source local .nvimrc
 local local_vimrc = vim.fn.getcwd() .. "/.nvimrc"

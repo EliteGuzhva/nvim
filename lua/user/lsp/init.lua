@@ -6,7 +6,7 @@ end
 local opts = {
     on_attach = require("user.lsp.handlers").on_attach,
     capabilities = require("user.lsp.handlers").capabilities,
-    root_dir = function() return vim.loop.cwd() end,
+    root_dir = function() return vim.uv.cwd() end,
 }
 
 -- dartls
