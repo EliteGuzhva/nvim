@@ -3,208 +3,9 @@ if not status_ok then
   return
 end
 
-local opts = {
-  mode = "n", -- NORMAL mode
-  prefix = "<leader>",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
-}
-
-local mappings = {
-  ["q"] = { ":q<CR>", "Quit" },
-  ["x"] = { ":xa<CR>", "Save and quit all" },
-  ["h"] = { ":wincmd h<CR>", "Move to left window" },
-  ["j"] = { ":wincmd j<CR>", "Move to bottom window" },
-  ["k"] = { ":wincmd k<CR>", "Move to top window" },
-  ["l"] = { ":wincmd l<CR>", "Move to right window" },
-  ["="] = { ":wincmd =<CR>", "Equalize windows" },
-  ["so"] = { ":so %<CR>", "Source current file" },
-  ["m"] = { "<cmd>MaximizerToggle!<CR>", "Maximize window" },
-
-  ["w"] = {
-    name = "Theme",
-    ["s"] = { ':exec &background=="light" ? "set background=dark" : "set background=light"<CR>', "Switch background" },
-  },
-
-  ["p"] = {
-    name = "Project",
-    ["t"] = { ":NvimTreeToggle<CR>", "Toggle tree" },
-    ["f"] = { ":NvimTreeFindFile<CR>", "Find file" },
-  },
-
-  ["b"] = {
-    name = "Buffer",
-    ["c"] = { ":Bdelete!<CR>", "Close buffer" },
-    ["p"] = { ":BufferLineCyclePrev<CR>", "Previous buffer" },
-    ["n"] = { ":BufferLineCycleNext<CR>", "Next buffer" },
-    ["s"] = { ":BufferLinePick<CR>", "Select buffer" },
-    ["h"] = { ":BufferLineMovePrev<CR>", "Move buffer left" },
-    ["l"] = { ":BufferLineMoveNext<CR>", "Move buffer right" },
-  },
-
-  ["f"] = {
-    name = "Find",
-    ["f"] = { "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", "Find files" },
-    ["s"] = { "<cmd>Telescope live_grep<cr>", "Search text" },
-    ["l"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Find in current buffer" },
-    ["t"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-    ["d"] = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
-    ["p"] = { "<cmd>Telescope projects<cr>", "Projects" },
-    ["h"] = { "<cmd>Telescope help_tags<cr>", "Help" },
-    ["o"] = { "<cmd>Telescope lsp_document_symbols<cr>", "Document symbols" },
-    ["c"] = { "<cmd>lua require'telescope.builtin'.commands(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", "Commands" },
-  },
-
-  ["v"] = {
-    name = "Version Control",
-    ["k"] = { "<cmd>Gitsigns prev_hunk<cr>", "Previous hunk" },
-    ["j"] = { "<cmd>Gitsigns next_hunk<cr>", "Next hunk" },
-    ["p"] = { "<cmd>Gitsigns preview_hunk<cr>", "Preview hunk" },
-    ["u"] = { "<cmd>Gitsigns reset_hunk<cr>", "Reset hunk" },
-    ["d"] = { "<cmd>VCDiff<cr>", "Diff" },
-    ["b"] = { "<cmd>VCBlame<cr>", "Blame" },
-    ["l"] = { "<cmd>VCLog<cr>", "Log" },
-    ["r"] = { "<cmd>VCRevert<cr>", "Revert" },
-    ["s"] = { "<cmd>VCStatus<cr>", "Status" },
-    ["v"] = {
-      name = "SVN",
-      ["k"] = { "<cmd>SvnGutterPrefHunk<cr>", "Previous hunk" },
-    },
-  },
-
-  ["t"] = {
-    name = "Terminal",
-    ["1"] = { "<cmd>1ToggleTerm direction=horizontal<cr>", "Terminal 1" },
-    ["2"] = { "<cmd>2ToggleTerm direction=horizontal<cr>", "Terminal 2" },
-    ["3"] = { "<cmd>3ToggleTerm direction=horizontal<cr>", "Terminal 3" },
-    ["t"] = { "<cmd>ToggleTermToggleAll<cr>", "Toggle all terminals" },
-    [";"] = { "<cmd>lua _FLOAT_TOGGLE()<cr>", "Float terminal" },
-    ["s"] = { "<cmd>lua _SPLIT_TOGGLE()<cr>", "Split terminal" },
-    ["g"] = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "Lazygit" },
-    ["d"] = { "<cmd>lua _LAZYDOCKER_TOGGLE()<cr>", "Lazydocker" },
-    ["h"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-    ["p"] = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
-    ["c"] = { "<cmd>lua _CCMAKE_TOGGLE()<cr>", "CCMake" },
-    ["a"] = { "<cmd>lua _CLAUDE_TOGGLE()<cr>", "Claude" },
-  },
-
-  ["z"] = {
-    name = "Zen mode",
-    ["f"] = { "<cmd>Goyo<CR>", "Goyo" },
-    ["l"] = { "<cmd>Limelight!!<CR>", "Limelight" },
-  },
-
-  ["s"] = {
-    name = "Session",
-    ["s"] = { "<cmd>SSave<CR>", "Save session" },
-    ["l"] = { "<cmd>SLoad<CR>", "Load session" },
-    ["d"] = { "<cmd>SDelete<CR>", "Delete session" },
-    ["c"] = { "<cmd>SClose<CR>", "Close session" },
-  },
-
-  ["d"] = {
-    name = "Debug",
-    ["d"] = { "<cmd>lua _START_DEBUGGING()<CR>", "Start debugging" },
-    ["e"] = { "<cmd>lua _STOP_DEBUGGING()<CR>", "Stop debugging" },
-    ["s"] = { "<cmd>lua require('dap').terminate()<CR>", "Terminate" },
-    ["c"] = { "<cmd>lua require('dap').continue()<CR>", "Continue" },
-    ["r"] = { "<cmd>lua require('dap').run_last()<CR>", "Run last" },
-    ["f"] = { "<cmd>lua require('dap').run_to_cursor()<CR>", "Run to cursor" },
-    ["n"] = { "<cmd>lua require('dap').step_over()<CR>", "Step over" },
-    ["j"] = { "<cmd>lua require('dap').step_into()<CR>", "Step into" },
-    ["k"] = { "<cmd>lua require('dap').step_out()<CR>", "Step out" },
-    ["x"] = { "<cmd>lua require('dap').clear_breakpoints()<CR>", "Clear breakpoints" },
-    ["b"] = { "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle breakpoint" },
-    ["o"] = { "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", "Conditional breakpoint" },
-    ["u"] = { "<cmd>lua require('dapui').toggle()<CR>", "Toggle UI" },
-    ["i"] = { "<cmd>lua require('dapui').eval()<CR>", "Evaluate" },
-  },
-
-  ["g"] = {
-    name = "LSP",
-    ["D"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Go to declaration" },
-    ["d"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition" },
-    ["i"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Go to implementation" },
-    ["r"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "References" },
-    ["h"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
-    ["H"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
-    ["n"] = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-    ["f"] = { "<cmd>lua vim.lsp.buf.code_action({ apply = true })<CR>", "Code action" },
-    ["c"] = { "<cmd>lua vim.lsp.buf.format()<CR>", "Format" },
-    ["o"] = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open float" },
-    ["k"] = { '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', "Previous diagnostic" },
-    ["j"] = { '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', "Next diagnostic" },
-    ["l"] = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "Set loclist" },
-    ["s"] = { "<cmd>ClangdSwitchSourceHeader<CR>", "Switch source/header" },
-  },
-
-  ["c"] = {
-    name = "Build",
-    ["x"] = { "<cmd>BCCMakeClean<CR>", "CMake clean" },
-    ["c"] = { "<cmd>BCCMakeConfigure<CR>", "CMake configure" },
-    ["b"] = { "<cmd>BCCMakeBuild<CR>", "CMake build" },
-    ["i"] = { "<cmd>BCCMakeInstall<CR>", "CMake install" },
-    ["p"] = { "<cmd>BCConanInstall<CR>", "Conan install" },
-    ["r"] = { "<cmd>BCLaunch<CR>", "Run" },
-    [";"] = { "<cmd>BCCMakeBuildLaunch<CR>", "Build and run" },
-  },
-}
-
--- Non-leader mappings
-local non_leader_mappings = {
-  ["r"] = { ":redo<CR>", "Redo" },
-  ["-"] = { "<C-W>-", "Decrease height" },
-  ["+"] = { "<C-W>+", "Increase height" },
-  ["<"] = { "<C-W><", "Decrease width" },
-  [">"] = { "<C-W>>", "Increase width" },
-  ["W"] = { ":Bdelete!<CR>", "Close buffer" },
-  ["J"] = { ":BufferLineCyclePrev<CR>", "Previous buffer" },
-  ["K"] = { ":BufferLineCycleNext<CR>", "Next buffer" },
-  ["H"] = { ":BufferLineMovePrev<CR>", "Move buffer left" },
-  ["L"] = { ":BufferLineMoveNext<CR>", "Move buffer right" },
-}
-
--- Function key mappings
-local function_key_mappings = {
-  ["<F5>"] = { "<cmd>lua _START_DEBUGGING()<CR>", "Start debugging" },
-  ["<F8>"] = { "<cmd>lua _STOP_DEBUGGING()<CR>", "Stop debugging" },
-  ["<F9>"] = { "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle breakpoint" },
-  ["<F10>"] = { "<cmd>lua require('dap').step_over()<CR>", "Step over" },
-  ["<F11>"] = { "<cmd>lua require('dap').step_into()<CR>", "Step into" },
-  ["<F12>"] = { "<cmd>lua require('dap').step_out()<CR>", "Step out" },
-}
-
--- Ctrl mappings
-local ctrl_mappings = {
-  ["<C-p>"] = { "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", "Find files" },
-}
-
--- Visual mode mappings
-local visual_mappings = {
-  ["<leader>"] = {
-    ["g"] = {
-      name = "LSP",
-      ["c"] = { "<cmd>lua vim.lsp.buf.format()<CR>", "Format" },
-    },
-  },
-  ["<"] = { "<gv", "Indent left" },
-  [">"] = { ">gv", "Indent right" },
-}
-
--- Insert mode mappings
-local insert_mappings = {
-  ["<C-v>"] = { "<C-r>+", "Paste from clipboard" },
-}
-
--- Terminal mode mappings
-local terminal_mappings = {
-  ["<Esc>"] = { "<C-\\><C-N>", "Exit terminal mode" },
-}
-
--- Setup
+-- Setup which-key with updated configuration
 which_key.setup({
+  preset = "modern",
   plugins = {
     marks = true,
     registers = true,
@@ -222,23 +23,17 @@ which_key.setup({
       g = true,
     },
   },
-  operators = { gc = "Comments" },
-  key_labels = {},
   icons = {
     breadcrumb = "»",
     separator = "➜",
     group = "+",
   },
-  popup_mappings = {
-    scroll_down = "<c-d>",
-    scroll_up = "<c-u>",
-  },
-  window = {
+  win = {
     border = "rounded",
-    position = "bottom",
-    margin = { 1, 0, 1, 0 },
     padding = { 2, 2, 2, 2 },
-    winblend = 0,
+    wo = {
+      winblend = 0,
+    }
   },
   layout = {
     height = { min = 4, max = 25 },
@@ -246,21 +41,202 @@ which_key.setup({
     spacing = 3,
     align = "left",
   },
-  ignore_missing = true,
-  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
+  keys = {
+    scroll_down = "<c-d>",
+    scroll_up = "<c-u>",
+  },
+  filter = function(mapping)
+    return mapping.desc and mapping.desc ~= ""
+  end,
+  defer = function(ctx)
+    return ctx.mode == "V" or ctx.mode == "<C-V>"
+  end,
+  replace = {
+    ["<Space>"] = "SPC",
+    ["<cr>"] = "RET",
+    ["<tab>"] = "TAB",
+  },
+  triggers = {
+    { "<auto>", mode = "nxsot" },
+  },
   show_help = true,
-  triggers = "auto",
-  triggers_blacklist = {
-    i = { "j", "k" },
-    v = { "j", "k" },
+  show_keys = true,
+})
+
+-- Leader key mappings with new spec format
+which_key.add({
+  { "<leader>q", ":q<CR>", desc = "Quit", nowait = true, remap = false },
+  { "<leader>x", ":xa<CR>", desc = "Save and quit all", nowait = true, remap = false },
+  { "<leader>h", ":wincmd h<CR>", desc = "Move to left window", nowait = true, remap = false },
+  { "<leader>j", ":wincmd j<CR>", desc = "Move to bottom window", nowait = true, remap = false },
+  { "<leader>k", ":wincmd k<CR>", desc = "Move to top window", nowait = true, remap = false },
+  { "<leader>l", ":wincmd l<CR>", desc = "Move to right window", nowait = true, remap = false },
+  { "<leader>=", ":wincmd =<CR>", desc = "Equalize windows", nowait = true, remap = false },
+  { "<leader>so", ":so %<CR>", desc = "Source current file", nowait = true, remap = false },
+  { "<leader>m", "<cmd>MaximizerToggle!<CR>", desc = "Maximize window", nowait = true, remap = false },
+
+  -- Theme
+  { "<leader>w", group = "Theme", nowait = true, remap = false },
+  { "<leader>ws", ':exec &background=="light" ? "set background=dark" : "set background=light"<CR>', desc = "Switch background", nowait = true, remap = false },
+
+  -- Project
+  { "<leader>p", group = "Project", nowait = true, remap = false },
+  { "<leader>pt", ":NvimTreeToggle<CR>", desc = "Toggle tree", nowait = true, remap = false },
+  { "<leader>pf", ":NvimTreeFindFile<CR>", desc = "Find file", nowait = true, remap = false },
+
+  -- Buffer
+  { "<leader>b", group = "Buffer", nowait = true, remap = false },
+  { "<leader>bc", ":Bdelete!<CR>", desc = "Close buffer", nowait = true, remap = false },
+  { "<leader>bp", ":BufferLineCyclePrev<CR>", desc = "Previous buffer", nowait = true, remap = false },
+  { "<leader>bn", ":BufferLineCycleNext<CR>", desc = "Next buffer", nowait = true, remap = false },
+  { "<leader>bs", ":BufferLinePick<CR>", desc = "Select buffer", nowait = true, remap = false },
+  { "<leader>bh", ":BufferLineMovePrev<CR>", desc = "Move buffer left", nowait = true, remap = false },
+  { "<leader>bl", ":BufferLineMoveNext<CR>", desc = "Move buffer right", nowait = true, remap = false },
+
+  -- Find
+  { "<leader>f", group = "Find", nowait = true, remap = false },
+  { "<leader>ff", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", desc = "Find files", nowait = true, remap = false },
+  { "<leader>fs", "<cmd>Telescope live_grep<cr>", desc = "Search text", nowait = true, remap = false },
+  { "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Find in current buffer", nowait = true, remap = false },
+  { "<leader>ft", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme", nowait = true, remap = false },
+  { "<leader>fd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics", nowait = true, remap = false },
+  { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Projects", nowait = true, remap = false },
+  { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help", nowait = true, remap = false },
+  { "<leader>fo", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document symbols", nowait = true, remap = false },
+  { "<leader>fc", "<cmd>lua require'telescope.builtin'.commands(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", desc = "Commands", nowait = true, remap = false },
+
+  -- Version Control
+  { "<leader>v", group = "Version Control", nowait = true, remap = false },
+  { "<leader>vk", "<cmd>Gitsigns prev_hunk<cr>", desc = "Previous hunk", nowait = true, remap = false },
+  { "<leader>vj", "<cmd>Gitsigns next_hunk<cr>", desc = "Next hunk", nowait = true, remap = false },
+  { "<leader>vp", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview hunk", nowait = true, remap = false },
+  { "<leader>vu", "<cmd>Gitsigns reset_hunk<cr>", desc = "Reset hunk", nowait = true, remap = false },
+  { "<leader>vd", "<cmd>VCDiff<cr>", desc = "Diff", nowait = true, remap = false },
+  { "<leader>vb", "<cmd>VCBlame<cr>", desc = "Blame", nowait = true, remap = false },
+  { "<leader>vl", "<cmd>VCLog<cr>", desc = "Log", nowait = true, remap = false },
+  { "<leader>vr", "<cmd>VCRevert<cr>", desc = "Revert", nowait = true, remap = false },
+  { "<leader>vs", "<cmd>VCStatus<cr>", desc = "Status", nowait = true, remap = false },
+  { "<leader>vv", group = "SVN", nowait = true, remap = false },
+  { "<leader>vvk", "<cmd>SvnGutterPrefHunk<cr>", desc = "Previous hunk", nowait = true, remap = false },
+
+  -- Terminal
+  { "<leader>t", group = "Terminal", nowait = true, remap = false },
+  { "<leader>t1", "<cmd>1ToggleTerm direction=horizontal<cr>", desc = "Terminal 1", nowait = true, remap = false },
+  { "<leader>t2", "<cmd>2ToggleTerm direction=horizontal<cr>", desc = "Terminal 2", nowait = true, remap = false },
+  { "<leader>t3", "<cmd>3ToggleTerm direction=horizontal<cr>", desc = "Terminal 3", nowait = true, remap = false },
+  { "<leader>tt", "<cmd>ToggleTermToggleAll<cr>", desc = "Toggle all terminals", nowait = true, remap = false },
+  { "<leader>t;", "<cmd>lua _FLOAT_TOGGLE()<cr>", desc = "Float terminal", nowait = true, remap = false },
+  { "<leader>ts", "<cmd>lua _SPLIT_TOGGLE()<cr>", desc = "Split terminal", nowait = true, remap = false },
+  { "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", desc = "Lazygit", nowait = true, remap = false },
+  { "<leader>td", "<cmd>lua _LAZYDOCKER_TOGGLE()<cr>", desc = "Lazydocker", nowait = true, remap = false },
+  { "<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>", desc = "Htop", nowait = true, remap = false },
+  { "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", desc = "Python", nowait = true, remap = false },
+  { "<leader>tc", "<cmd>lua _CCMAKE_TOGGLE()<cr>", desc = "CCMake", nowait = true, remap = false },
+  { "<leader>ta", "<cmd>lua _CLAUDE_TOGGLE()<cr>", desc = "Claude", nowait = true, remap = false },
+
+  -- Zen mode
+  { "<leader>z", group = "Zen mode", nowait = true, remap = false },
+  { "<leader>zf", "<cmd>Goyo<CR>", desc = "Goyo", nowait = true, remap = false },
+  { "<leader>zl", "<cmd>Limelight!!<CR>", desc = "Limelight", nowait = true, remap = false },
+
+  -- Session
+  { "<leader>s", group = "Session", nowait = true, remap = false },
+  { "<leader>ss", "<cmd>SSave<CR>", desc = "Save session", nowait = true, remap = false },
+  { "<leader>sl", "<cmd>SLoad<CR>", desc = "Load session", nowait = true, remap = false },
+  { "<leader>sd", "<cmd>SDelete<CR>", desc = "Delete session", nowait = true, remap = false },
+  { "<leader>sc", "<cmd>SClose<CR>", desc = "Close session", nowait = true, remap = false },
+
+  -- Debug
+  { "<leader>d", group = "Debug", nowait = true, remap = false },
+  { "<leader>dd", "<cmd>lua _START_DEBUGGING()<CR>", desc = "Start debugging", nowait = true, remap = false },
+  { "<leader>de", "<cmd>lua _STOP_DEBUGGING()<CR>", desc = "Stop debugging", nowait = true, remap = false },
+  { "<leader>ds", "<cmd>lua require('dap').terminate()<CR>", desc = "Terminate", nowait = true, remap = false },
+  { "<leader>dc", "<cmd>lua require('dap').continue()<CR>", desc = "Continue", nowait = true, remap = false },
+  { "<leader>dr", "<cmd>lua require('dap').run_last()<CR>", desc = "Run last", nowait = true, remap = false },
+  { "<leader>df", "<cmd>lua require('dap').run_to_cursor()<CR>", desc = "Run to cursor", nowait = true, remap = false },
+  { "<leader>dn", "<cmd>lua require('dap').step_over()<CR>", desc = "Step over", nowait = true, remap = false },
+  { "<leader>dj", "<cmd>lua require('dap').step_into()<CR>", desc = "Step into", nowait = true, remap = false },
+  { "<leader>dk", "<cmd>lua require('dap').step_out()<CR>", desc = "Step out", nowait = true, remap = false },
+  { "<leader>dx", "<cmd>lua require('dap').clear_breakpoints()<CR>", desc = "Clear breakpoints", nowait = true, remap = false },
+  { "<leader>db", "<cmd>lua require('dap').toggle_breakpoint()<CR>", desc = "Toggle breakpoint", nowait = true, remap = false },
+  { "<leader>do", "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", desc = "Conditional breakpoint", nowait = true, remap = false },
+  { "<leader>du", "<cmd>lua require('dapui').toggle()<CR>", desc = "Toggle UI", nowait = true, remap = false },
+  { "<leader>di", "<cmd>lua require('dapui').eval()<CR>", desc = "Evaluate", nowait = true, remap = false },
+
+  -- LSP
+  { "<leader>g", group = "LSP", nowait = true, remap = false },
+  { "<leader>gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", desc = "Go to declaration", nowait = true, remap = false },
+  { "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "Go to definition", nowait = true, remap = false },
+  { "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", desc = "Go to implementation", nowait = true, remap = false },
+  { "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", desc = "References", nowait = true, remap = false },
+  { "<leader>gh", "<cmd>lua vim.lsp.buf.hover()<CR>", desc = "Hover", nowait = true, remap = false },
+  { "<leader>gH", "<cmd>lua vim.lsp.buf.signature_help()<CR>", desc = "Signature help", nowait = true, remap = false },
+  { "<leader>gn", "<cmd>lua vim.lsp.buf.rename()<CR>", desc = "Rename", nowait = true, remap = false },
+  { "<leader>gf", "<cmd>lua vim.lsp.buf.code_action({ apply = true })<CR>", desc = "Code action", nowait = true, remap = false },
+  { "<leader>gc", "<cmd>lua vim.lsp.buf.format()<CR>", desc = "Format", nowait = true, remap = false },
+  { "<leader>go", "<cmd>lua vim.diagnostic.open_float()<CR>", desc = "Open float", nowait = true, remap = false },
+  { "<leader>gk", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', desc = "Previous diagnostic", nowait = true, remap = false },
+  { "<leader>gj", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', desc = "Next diagnostic", nowait = true, remap = false },
+  { "<leader>gl", "<cmd>lua vim.diagnostic.setloclist()<CR>", desc = "Set loclist", nowait = true, remap = false },
+  { "<leader>gs", "<cmd>ClangdSwitchSourceHeader<CR>", desc = "Switch source/header", nowait = true, remap = false },
+
+  -- Build
+  { "<leader>c", group = "Build", nowait = true, remap = false },
+  { "<leader>cx", "<cmd>BCCMakeClean<CR>", desc = "CMake clean", nowait = true, remap = false },
+  { "<leader>cc", "<cmd>BCCMakeConfigure<CR>", desc = "CMake configure", nowait = true, remap = false },
+  { "<leader>cb", "<cmd>BCCMakeBuild<CR>", desc = "CMake build", nowait = true, remap = false },
+  { "<leader>ci", "<cmd>BCCMakeInstall<CR>", desc = "CMake install", nowait = true, remap = false },
+  { "<leader>cp", "<cmd>BCConanInstall<CR>", desc = "Conan install", nowait = true, remap = false },
+  { "<leader>cr", "<cmd>BCLaunch<CR>", desc = "Run", nowait = true, remap = false },
+  { "<leader>c;", "<cmd>BCCMakeBuildLaunch<CR>", desc = "Build and run", nowait = true, remap = false },
+})
+
+-- Non-leader mappings with new spec format
+which_key.add({
+  { "r", ":redo<CR>", desc = "Redo" },
+  { "-", "<C-W>-", desc = "Decrease height" },
+  { "+", "<C-W>+", desc = "Increase height" },
+  { "<", "<C-W><", desc = "Decrease width" },
+  { ">", "<C-W>>", desc = "Increase width" },
+  { "W", ":Bdelete!<CR>", desc = "Close buffer" },
+  { "J", ":BufferLineCyclePrev<CR>", desc = "Previous buffer" },
+  { "K", ":BufferLineCycleNext<CR>", desc = "Next buffer" },
+  { "H", ":BufferLineMovePrev<CR>", desc = "Move buffer left" },
+  { "L", ":BufferLineMoveNext<CR>", desc = "Move buffer right" },
+})
+
+-- Function key mappings with new spec format
+which_key.add({
+  { "<F5>", "<cmd>lua _START_DEBUGGING()<CR>", desc = "Start debugging" },
+  { "<F8>", "<cmd>lua _STOP_DEBUGGING()<CR>", desc = "Stop debugging" },
+  { "<F9>", "<cmd>lua require('dap').toggle_breakpoint()<CR>", desc = "Toggle breakpoint" },
+  { "<F10>", "<cmd>lua require('dap').step_over()<CR>", desc = "Step over" },
+  { "<F11>", "<cmd>lua require('dap').step_into()<CR>", desc = "Step into" },
+  { "<F12>", "<cmd>lua require('dap').step_out()<CR>", desc = "Step out" },
+})
+
+-- Ctrl mappings with new spec format
+which_key.add({
+  { "<C-p>", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", desc = "Find files" },
+})
+
+-- Visual mode mappings with new spec format
+which_key.add({
+  {
+    mode = { "v" },
+    { "<leader>g", group = "LSP" },
+    { "<leader>gc", "<cmd>lua vim.lsp.buf.format()<CR>", desc = "Format" },
+    { "<", "<gv", desc = "Indent left" },
+    { ">", ">gv", desc = "Indent right" },
   },
 })
 
--- Register all mappings
-which_key.register(mappings, opts)
-which_key.register(non_leader_mappings, { mode = "n" })
-which_key.register(function_key_mappings, { mode = "n" })
-which_key.register(ctrl_mappings, { mode = "n" })
-which_key.register(visual_mappings, { mode = "v" })
-which_key.register(insert_mappings, { mode = "i" })
-which_key.register(terminal_mappings, { mode = "t" })
+-- Insert mode mappings with new spec format
+which_key.add({
+  { "<C-v>", "<C-r>+", desc = "Paste from clipboard", mode = "i" },
+})
+
+-- Terminal mode mappings with new spec format
+which_key.add({
+  { "<Esc>", "<C-\\><C-N>", desc = "Exit terminal mode", mode = "t" },
+})
