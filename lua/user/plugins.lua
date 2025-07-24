@@ -209,9 +209,6 @@ return {
     dependencies = {
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
-    config = function()
-      require("user.comment")
-    end,
   },
 
   -- Key bindings
