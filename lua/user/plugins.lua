@@ -205,8 +205,13 @@ return {
   { "rcarriga/nvim-notify", lazy = true },
   {
     "numToStr/Comment.nvim",
-    keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
-    version = "v0.6",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
+    config = function()
+      require("user.comment")
+    end,
   },
 
   -- Key bindings
@@ -221,7 +226,7 @@ return {
   { "junegunn/vim-easy-align", cmd = { "EasyAlign", "LiveEasyAlign" } },
   { "tpope/vim-surround", keys = { "c", "d", "y" } },
   { "unblevable/quick-scope", keys = { "f", "F", "t", "T" } },
-  { "christoomey/vim-system-copy", keys = { "cp", "cv" } },
+  { "christoomey/vim-system-copy", event = { "BufReadPost", "BufNewFile" } },
   { "szw/vim-maximizer", keys = { { "<leader>sm", "<cmd>MaximizerToggle<cr>", desc = "Maximize" } } },
   { "lyokha/vim-xkbswitch", event = "InsertEnter" },
   { "JamshedVesuna/vim-markdown-preview", ft = "markdown" },

@@ -4,9 +4,29 @@ if not status_ok then
 end
 
 comment.setup({
+	-- Add these key bindings
+	toggler = {
+		line = 'gcc',
+		block = 'gbc',
+	},
+	opleader = {
+		line = 'gc',
+		block = 'gb',
+	},
+	extra = {
+		above = 'gcO',
+		below = 'gco',
+		eol = 'gcA',
+	},
+	mappings = {
+		basic = true,
+		extra = true,
+	},
 	pre_hook = function(ctx)
+		-- Integration with nvim-ts-context-commentstring
 		local U = require("Comment.utils")
 
+		-- Determine whether to use linewise or blockwise commentstring
 		local location = nil
 		if ctx.ctype == U.ctype.block then
 			location = require("ts_context_commentstring.utils").get_cursor_location()
