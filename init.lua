@@ -20,6 +20,7 @@ require("user.dap")
 require("user.whichkey")
 require("user.noice")
 require("user.dressing")
+require("user.avante")
 
 -- Legacy
 require("user.quick-scope")

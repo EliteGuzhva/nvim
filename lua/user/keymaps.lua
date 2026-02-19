@@ -87,8 +87,6 @@ keymap("n", "<leader>vb", "<cmd>VCBlame<cr>", opts)
 keymap("n", "<leader>vl", "<cmd>VCLog<cr>", opts)
 keymap("n", "<leader>vr", "<cmd>VCRevert<cr>", opts)
 keymap("n", "<leader>vs", "<cmd>VCStatus<cr>", opts)
-keymap("n", "<leader>vvk", "<cmd>SvnGutterPrefHunk<cr>", opts)
-keymap("n", "<leader>vvk", "<cmd>SvnGutterNextHunk<cr>", opts)
 
 -- Terminal
 keymap("n", "<leader>t1", "<cmd>1ToggleTerm direction=horizontal<cr>", opts)

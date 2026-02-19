@@ -116,8 +116,6 @@ which_key.add({
   { "<leader>vl", "<cmd>VCLog<cr>", desc = "Log", nowait = true, remap = false },
   { "<leader>vr", "<cmd>VCRevert<cr>", desc = "Revert", nowait = true, remap = false },
   { "<leader>vs", "<cmd>VCStatus<cr>", desc = "Status", nowait = true, remap = false },
-  { "<leader>vv", group = "SVN", nowait = true, remap = false },
-  { "<leader>vvk", "<cmd>SvnGutterPrefHunk<cr>", desc = "Previous hunk", nowait = true, remap = false },
 
   -- Terminal
   { "<leader>t", group = "Terminal", nowait = true, remap = false },
@@ -138,6 +136,14 @@ which_key.add({
   { "<leader>z", group = "Zen mode", nowait = true, remap = false },
   { "<leader>zf", "<cmd>Goyo<CR>", desc = "Goyo", nowait = true, remap = false },
   { "<leader>zl", "<cmd>Limelight!!<CR>", desc = "Limelight", nowait = true, remap = false },
+
+  -- Avante AI
+  { "<leader>a", group = "Avante AI", nowait = true, remap = false },
+  { "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "Ask", nowait = true, remap = false },
+  { "<leader>ar", "<cmd>AvanteRefresh<cr>", desc = "Refresh", nowait = true, remap = false },
+  { "<leader>ae", "<cmd>AvanteEdit<cr>", desc = "Edit", nowait = true, remap = false },
+  { "<leader>at", "<cmd>AvanteToggle<cr>", desc = "Toggle sidebar", nowait = true, remap = false },
+  { "<leader>as", "<cmd>AvanteSwitchProvider<cr>", desc = "Switch Provider", nowait = true, remap = false },
 
   -- Session
   { "<leader>s", group = "Session", nowait = true, remap = false },
@@ -224,6 +230,8 @@ which_key.add({
 which_key.add({
   {
     mode = { "v" },
+    { "<leader>a", group = "Avante AI" },
+    { "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "Ask with selection" },
     { "<leader>g", group = "LSP" },
     { "<leader>gc", "<cmd>lua vim.lsp.buf.format()<CR>", desc = "Format" },
     { "<", "<gv", desc = "Indent left" },

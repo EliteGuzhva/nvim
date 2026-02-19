@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a personal Neovim configuration written entirely in Lua. It uses Packer.nvim for plugin management and is organized as a modular IDE-like setup with strong support for C++, Python, Rust, and other languages.
+This is a personal Neovim configuration written entirely in Lua. It uses lazy.nvim for plugin management and is organized as a modular IDE-like setup with strong support for C++, Python, Rust, and other languages.
 
 ## Commands
 
 ### Plugin Management
-- **Update plugins**: Open Neovim and run `:PackerSync`
-- **Install new plugin**: Add to `lua/user/plugins.lua`, then `:PackerSync`
-- **Clean unused plugins**: `:PackerClean`
+- **Update plugins**: Open Neovim and run `:Lazy sync`
+- **Install new plugin**: Add to `lua/user/plugins.lua`, then `:Lazy sync`
+- **Clean unused plugins**: `:Lazy clean`
 
 ### Build System (C++/CMake)
 Key mappings for CMake/Conan projects:

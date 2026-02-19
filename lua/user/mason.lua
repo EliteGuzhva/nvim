@@ -25,6 +25,7 @@ mason_lspconfig.setup({
 		"rust_analyzer",
 		"yamlls",
 	},
+	automatic_enable = false,
 })
 
 -- Mason Dap
@@ -58,20 +59,8 @@ mason_null.setup({
 	ensure_installed = {
 		"stylua",
 		"black",
-		"flake8",
-		"mypy",
 		"clang_format",
 		"cmakelang",
-		"prettier",
-        "jsonlint",
-        "yamllint",
 	},
-	automatic_setup = true,
-	handlers = {
-		function(source_name, methods)
-			mason_null.default_setup(source_name, methods)
-		end,
-		clang_format = function()
-		end,
-	},
+	automatic_setup = false,  -- Disabled: we manually configure formatters in none-ls.lua
 })
